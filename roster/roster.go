@@ -51,8 +51,8 @@ func main() {
 func CreateUserDB(db *sql.DB) error {
 	createStmt := `
 	CREATE TABLE User (
-    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-    name   TEXT UNIQUE
+		id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+		name   TEXT UNIQUE
 	);
 
 	CREATE TABLE Course (
@@ -169,8 +169,8 @@ func GetAssignmentAnswer(db *sql.DB) (string, error) {
 
 	answerStmt := `
 	SELECT hex(User.name || Course.title || Member.role ) AS X FROM 
-    User JOIN Member JOIN Course 
-    ON User.id = Member.user_id AND Member.course_id = Course.id
+		User JOIN Member JOIN Course 
+		ON User.id = Member.user_id AND Member.course_id = Course.id
 		ORDER BY X;`
 	row := tx.QueryRow(answerStmt)
 	err = row.Scan(&answer)
